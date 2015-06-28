@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Create a new employee</title>
+
+        <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/employee/create.js" %}"></script>
+
+    </head>
+    <body>
+
+        <form id="form-create" method="post">{% csrf_token %}
+
+            Name : <input type="text" name="name"/><br/><br/>
+
+            Gender : <label><input type="radio" name="gender" value="male" checked="checked"/> Male</label>
+                     <label><input type="radio" name="gender" value="female"/> Female</label>
+
+            <input type="button" name="btn-create-employee" value="Create"/>
+        </form>
+
+        <br/>
+
+        <span id="message"></span>
+    </body>
+</html>

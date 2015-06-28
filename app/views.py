@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, RequestContext
 from django.http import HttpResponse
+import time
 from django.contrib.sessions.models import Session
 from .models import Employee
 
@@ -29,6 +30,10 @@ def save_employee(request):
 
     employee.name = name
     employee.gender = gender
+
+    created_time = time.localtime(time.time())
+    employee.created_at = str(created_time.tm_year) + '-' + str(created_time.tm_mon) + '-' + str(created_time.tm_mday)
+
     employee.save()
 
     return HttpResponse('done')
