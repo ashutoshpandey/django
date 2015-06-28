@@ -1,0 +1,49 @@
+Pycharm setup
+
+1. Created project myapp
+
+2. Created application app
+
+3. Make sure, manage.py have following setting:   os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings")
+
+4. urls.py contains all the urls
+   Following is a sample:
+
+from django.conf.urls import url
+
+from . import views
+
+urlpatterns = [
+    url(r'myapp/', views.homepage, name='home'),
+]
+
+   So, whey somebody hits:  http://localhost:port/myapp => django executes the function views -> homepage()
+   You can give any name instead of 'home'
+
+5. views.py contains functions corresponding to views
+
+6. models.py contains all the model classes
+
+7. Changed settings.py to talk to mysql database
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'myapp',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
+        'PORT': '3307'
+    }
+}
+
+Here 'NAME' is the name of database, intentionally changed 'PORT' to 3307 as I already had another mysql at 3306
+
+8. Started development server from:  Tools -> Run manage.py Task -> run server
+
+    Now, we can run our application at:   http://localhost:8000/myapp
+
+9. After creating model classes in models.py, on command prompt, in the 'myapp' directory, executed following command:
+   python manage.py makemigrations
+
+   This will create tables in database corresponding to models
