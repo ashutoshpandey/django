@@ -1,0 +1,18 @@
+<html>
+<body>
+
+<h1>Employees</h1>
+<ul>
+    {% for employee in employees %}
+        <li>{{ employee.name }} :
+            <a href="{% url 'edit_employee' employee.id %}">edit</a>
+            <a href="{% url 'delete_employee' employee.id %}">delete</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'create_employee' %}">New</a>
+
+
+</body>
+</html>

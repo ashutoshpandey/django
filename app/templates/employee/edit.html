@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Create a new employee</title>
+
+        <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+        <script type="text/javascript" src="{% static "js/employee/edit.js" %}"></script>
+
+    </head>
+    <body>
+
+        <form id="form-update" method="post">{% csrf_token %}
+
+            Name : <input type="text" name="name" value="{{ employee.name }}"/><br/><br/>
+
+            Gender : <label><input type="radio" name="gender" value="male" checked="checked"/> Male</label>
+                     <label><input type="radio" name="gender" value="female"/> Female</label>
+
+            <input type="button" name="btn-update-employee" value="Update"/>
+        </form>
+
+        <br/>
+
+        <span id="message"></span>
+    </body>
+</html>

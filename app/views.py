@@ -49,27 +49,30 @@ def list_employee(request):
 
 
 # edit employee
-def edit_employee(request, key):        # key is the 'id' column, 'id' keyword already exists
+def edit_employee(request, employee_id):        # key is the 'id' column, 'id' keyword already exists
 
-    employee = Employee.objects.get(key)
+    employee = Employee.objects.get(id=employee_id)
 
     if not employee:
         return redirect('homepage')
     else:
+
+        request.session['userId'] = employee.id
+
         data = {'employee': employee, 'found': 'true'}
 
-        return render(request, 'employee/create.html', data)
+        return render(request, 'employee/edit.html', data)
 
 
 # update employee
 def update_employee(request):
 
-    key = Session['userId']
+    employee_id = request.session['userId']
 
-    if not key:
+    if not employee_id:
         return HttpResponse('invalid')
     else:
-        employee = Employee.objects.get(key)
+        employee = Employee.objects.get(id=employee_id)
 
         if not employee:
             return HttpResponse('invalid')
@@ -85,12 +88,12 @@ def update_employee(request):
 
 
 # delete employee
-def delete_employee(request, key):
-    employee = Employee.objects.get(key)
+def delete_employee(request, employee_id):
+    employee = Employee.objects.get(id=employee_id)
 
     if not employee:
-        return HttpResponse('invalid')
+        return redirect('/myapp/list')
     else:
         employee.delete()
 
-        return HttpResponse('done')
+        return redirect('/myapp/list')
